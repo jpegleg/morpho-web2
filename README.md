@@ -26,12 +26,12 @@ From the test docker-compose.yml:
 In production, rather than using Docker, we can use Kubernetes and mount those more appropriately.
 The purpose of the docker-compose.yml and the protean references are for some testing systems usage.
 
-## openssl for HTTPS (insecure, legacy)
+## openssl for HTTPS
 
 This program uses openssl for TLS, leveraging the wide range of support. Some types of PKI systems
 and ASN1 structures don't work in rustls at this time, so openssl can be used to improve certificate
-feature support. The defaults in the template are insecure, including TLSv1.0, TLSv1.1, and TLSv1.2
-and not enabling TLSv1.3. See https://github.com/jpegleg/morpho-web for more secure TLS with rustls.
+feature support. This version of morpho uses only TLSv1.2.
+See https://github.com/jpegleg/morpho-web for more secure added TLSv1.3 and rustls.
 
 ## tokio async io
 

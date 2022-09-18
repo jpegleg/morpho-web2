@@ -31,7 +31,7 @@ The purpose of the docker-compose.yml and the protean references are for some te
 This program uses openssl for TLS, leveraging the wide range of support. Some types of PKI systems
 and ASN1 structures don't work in rustls at this time, so openssl can be used to improve certificate
 feature support. This version of morpho uses only TLSv1.2.
-See https://github.com/jpegleg/morpho-web for more secure added TLSv1.3 and rustls.
+See https://github.com/jpegleg/morpho-web for using rustls instead of openssl and defaulting to TLSv1.3.
 
 ## tokio async io
 

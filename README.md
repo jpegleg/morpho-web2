@@ -12,7 +12,8 @@ image has no shell, nothing but the dependencies for the web server.
 
 The base image is less than 12MB for the entire framework. The size of the added content from `static`
 will increase the image size etc. Alternatively to doing a copy into the container image,
-the /app/static directory can be a volume mount containing the content to load. Note that by default the cert and key pair are in /app/ which is the workdir for the server, while the webroot is /app/static/.
+the /app/static directory can be a volume mount containing the content to load. Unlike the main morpho-web, morpho-web2 does
+not do a COPY on the static web dir or the cryptographic files and requires that they are mounted.
 
 From the test docker-compose.yml:
 
@@ -34,6 +35,8 @@ feature support. This version of morpho uses only TLSv1.2.
 See https://github.com/jpegleg/morpho-web for using rustls instead of openssl and defaulting to TLSv1.3.
 
 Note that TLS hardening of cipher selections and TLS version (disabling TLSv1.0 and TLSv1.1) applies in a version specific macro, defaulting to openssl 1.1.1 to apply the cipher spec.
+
+<b>Scan morpho2 before use to ensure TLS configurations are as desired.</b>
 
 ## tokio async io
 

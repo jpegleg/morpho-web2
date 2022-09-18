@@ -2,7 +2,7 @@ version: '3'
 services:
   morpho:
     image: localhost:5000/morpho-web2:test
-    container_name: morphodefault
+    container_name: morphoopenssl
     restart: unless-stopped
     ports:
       - "443:443"

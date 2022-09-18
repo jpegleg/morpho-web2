@@ -26,8 +26,10 @@ async fn main() -> std::io::Result<()> {
         .set_private_key_file("privkey.pem", SslFiletype::PEM)
         .unwrap();
     builder.set_certificate_chain_file("cert.pem").unwrap();
+    #[cfg(openssl111)]
+    builder.set_ciphersuites("TLS_AES_256_GCM_SHA384:TLS_AES_128_GCM_SHA256").unwrap();
 
-    log::info!("morpho initialized at {} >>> morpho2 HTTPS server on port 443 using openssl TLSv1.3 and TLSv1.2", readi);
+    log::info!("morpho2 initialized at {} >>> morpho2 HTTPS server on port 443 using openssl TLSv1.2 TLS_AES_256_GCM_SHA384 and TLS_AES_128_GCM_SHA256", readi);
     HttpServer::new(|| {
         App::new()
             .wrap(RedirectHttps::default())

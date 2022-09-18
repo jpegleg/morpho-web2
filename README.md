@@ -33,6 +33,8 @@ and ASN1 structures don't work in rustls at this time, so openssl can be used to
 feature support. This version of morpho uses only TLSv1.2.
 See https://github.com/jpegleg/morpho-web for using rustls instead of openssl and defaulting to TLSv1.3.
 
+Note that TLS hardening of cipher selections and TLS version (disabling TLSv1.0 and TLSv1.1) applies in a version specific macro, defaulting to openssl 1.1.1 to apply the cipher spec.
+
 ## tokio async io
 
 We can serve a lot of requests with actix use of tokio async io, letting IO-bound workloads scale very well.

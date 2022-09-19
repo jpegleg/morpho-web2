@@ -26,10 +26,10 @@ async fn main() -> std::io::Result<()> {
         .set_private_key_file("privkey.pem", SslFiletype::PEM)
         .unwrap();
     builder.set_certificate_chain_file("cert.pem").unwrap();
-    #[cfg(openssl111)]
-    builder.set_ciphersuites("TLS_AES_256_GCM_SHA384:TLS_AES_128_GCM_SHA256").unwrap();
-
-    log::info!("morpho2 initialized at {} >>> morpho2 HTTPS server on port 443 using openssl TLSv1.2 TLS_AES_256_GCM_SHA384 and TLS_AES_128_GCM_SHA256", readi);
+    // WARNING - openssl defaults to TLSv1.0, TLSv1.1, and TLSv1.2 support with TLSv1.3 disabled!
+    // work around - compiling outside of the Dockerfile builder and using openssl 1.1.1 can at least disable 1.0 and 1.1...
+    //builder.set_ciphersuites("TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:TLS_AES_128_CCM_8_SHA256:TLS_AES_128_CCM_SHA256").unwrap();
+    log::info!("morpho2 initialized at {} >>> morpho2 HTTPS server on port 443 using openssl TLSv1.2 compat mode", readi);
     HttpServer::new(|| {
         App::new()
             .wrap(RedirectHttps::default())

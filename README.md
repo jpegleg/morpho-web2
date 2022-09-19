@@ -31,12 +31,10 @@ The purpose of the docker-compose.yml and the protean references are for some te
 
 This program uses openssl for TLS, leveraging the wide range of support. Some types of PKI systems
 and ASN1 structures don't work in rustls at this time, so openssl can be used to improve certificate
-feature support. This version of morpho uses only TLSv1.2.
+feature support. This version of morpho uses TLSv1.2, but also can support TLSv1.0 and TLSv1.1.
 See https://github.com/jpegleg/morpho-web for using rustls instead of openssl and defaulting to TLSv1.3.
 
-Note that TLS hardening of cipher selections and TLS version (disabling TLSv1.0 and TLSv1.1) applies in a version specific macro, defaulting to openssl 1.1.1 to apply the cipher spec.
-
-<b>Scan morpho2 before use to ensure TLS configurations are as desired.</b>
+<b>Scan morpho2 before use to ensure TLS configurations are as desired, morpho-web2 is not a compliant TLS build because it can use TLSv1.0. Use https://github.com/jpegleg/morpho-web and rustls instead when possible.</b>
 
 ## tokio async io
 
@@ -48,7 +46,8 @@ web servers. The performance is very good and reliable.
 
 This web server template is cloud native, working well in Kubernetes and Docker, etc.
 It works well with many replicas, has a minimized set of dependencies and libraries,
-and puts security as a priority.
+and puts security as a priority, other than potentially allowing weaker than
+desired TLS configurations like the default on morpho-web2.
 
 ## redirecting to HTTPS
 
